@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script>
+      // Redirect to index.html and preserve the path
+      const segment = 1;
+      const l = window.location;
+      l.replace(
+        l.pathname
+          .split('/')
+          .slice(0, 1 + segment)
+          .join('/') +
+          '/index.html' +
+          l.search +
+          l.hash
+      );
+    </script>
+  </head>
+  <body>
+    <!-- Fallback if JS is disabled -->
+    <p>Redirecting...</p>
+  </body>
+</html>

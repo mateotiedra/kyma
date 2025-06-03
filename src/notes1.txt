@@ -1,0 +1,23 @@
+- Dedicated server vs cloud provider server for the backend?
+- Calls through API between dedicated server and DLAB server?
+- Firebase authentification
+- Fast API for the backend
+- PostGres for the database
+
+Functionnalities
+- Invite friend
+    - Multiplayer Scribble-like
+- Play online against random
+- Against AI
+- (Watch AI)
+
+- Onboarding on dlab website
+
+
+
+- Save data end games
+- End screen
+- Openai tuto
+- look for open source emojis collection
+- language levels B1, B2
+- Integrate letters clue

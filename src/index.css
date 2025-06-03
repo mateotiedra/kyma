@@ -1,0 +1,113 @@
+@import 'tailwindcss';
+@import 'rsuite/dist/rsuite-no-reset.min.css';
+
+@plugin 'tailwindcss-animate';
+
+@font-face {
+  font-family: 'Submariner';
+  src: url('./assets/fonts/submariner-r24-heavy.ttf') format('truetype');
+  font-weight: 900;
+}
+
+@font-face {
+  font-family: 'Submariner';
+  src: url('./assets/fonts/submariner-r24-black.ttf') format('truetype');
+  font-weight: 800;
+}
+
+@font-face {
+  font-family: 'Submariner';
+  src: url('./assets/fonts/submariner-r24-bold.ttf') format('truetype');
+  font-weight: 700;
+}
+
+@theme {
+  --color-primary: #03c2c4;
+  --color-secondary: #a519a5;
+  --color-violet: #a519a5;
+  --color-yellow-500: #ecac04;
+  --color-pink-500: #ea60a4;
+}
+
+body {
+  @apply bg-primary;
+}
+
+.text-button {
+  @apply px-4 py-2 rounded border cursor-pointer text-center;
+}
+
+.fly-hover {
+  @apply transition-all duration-200 ease-in-out relative;
+}
+
+.fly-hover:hover {
+  @apply transform -translate-y-0.5;
+}
+
+.page-container {
+  @apply p-5 max-w-2xl mx-auto;
+}
+
+.section-container {
+  @apply bg-white p-5;
+}
+
+.flex-centered {
+  @apply flex flex-col justify-center items-center;
+}
+
+.body1 {
+  @apply text-lg text-center;
+}
+
+@layer base {
+  caption {
+    @apply text-xs leading-tight font-medium;
+    font-family: 'Montserrat', sans-serif;
+  }
+
+  p {
+    @apply text-base;
+    font-family: 'Montserrat', sans-serif;
+  }
+
+  h1 {
+    @apply text-9xl text-black font-black uppercase flex items-center leading-none;
+    font-family: 'Submariner', sans-serif;
+    letter-spacing: -0.05em;
+    text-shadow: 2px 0 0 var(--color-violet);
+  }
+
+  h1.pb {
+    @apply mb-6;
+  }
+
+  h2 {
+    @apply text-6xl text-primary font-black leading-12 relative -left-1;
+    font-family: 'Submariner', sans-serif;
+    letter-spacing: -0.05em;
+    text-shadow: 2px 0 0 var(--color-violet);
+  }
+
+  h2.pb {
+    @apply mb-4;
+  }
+
+  h3 {
+    @apply text-3xl font-extrabold leading-6;
+    font-family: 'Submariner', sans-serif;
+  }
+
+  h3.pb {
+    @apply mb-2;
+  }
+
+  h4 {
+    @apply font-bold text-center text-gray-700;
+  }
+
+  h4.pb {
+    @apply mb-1;
+  }
+}
