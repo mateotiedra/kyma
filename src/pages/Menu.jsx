@@ -14,24 +14,38 @@ const Menu = () => {
               price: '21.–',
               ingredients:
                 'Brioche beurrée, homard, cébette, ciboulette, mayonnaise au citron',
+              modelUrl: '/assets/models/lobster-kiss.glb',
+              camPos: [
+                -5.6420153558161426, 3.9854443063593514, 1.5112565651280714,
+              ],
+              camRotat: [
+                -1.2079611744858216, -0.9238947109821136, -1.126719858856303,
+              ],
+              scale: 3.5,
             },
             {
               name: 'Briosh dog',
               price: '10.–',
               ingredients:
                 'Brioche beurrée, saucisse de poulet, oignons caramélisés, ketchup, moutarde',
+              modelUrl: '/assets/models/briosh-dog.glb',
+              scale: 5,
             },
             {
               name: 'Oriental chick',
               price: '17.–',
               ingredients:
                 'Brioche beurrée, poulet fondant, poivrons, sauce aux épices orientales',
+              modelUrl: '/assets/models/oriental-chick.glb',
+              scale: 4,
             },
             {
               name: 'Effilo slaw',
               price: '19.–',
               ingredients:
                 'Brioche beurrée, bœuf effiloché, salade de chou en coleslaw',
+              modelUrl: '/assets/models/effilo-slaw.glb',
+              scale: 3.6,
             },
             {
               name: 'From’thon',
@@ -43,6 +57,8 @@ const Menu = () => {
               price: '16.–',
               ingredients:
                 'Brioche beurrée, champignons, oignons caramélisés, épinards, cheddar, chou rouge',
+              modelUrl: '/assets/models/mushroom-fever.glb',
+              scale: 25,
             },
             {
               name: 'Brioshette du moment',

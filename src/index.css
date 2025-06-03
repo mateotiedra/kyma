@@ -34,7 +34,7 @@ body {
 }
 
 .text-button {
-  @apply px-4 py-2 rounded border cursor-pointer text-center;
+  @apply text-white rounded bg-primary px-4 py-2 cursor-pointer text-center;
 }
 
 .fly-hover {
@@ -61,14 +61,14 @@ body {
   @apply text-lg text-center;
 }
 
-@layer base {
-  caption {
-    @apply text-xs leading-tight font-medium;
-    font-family: 'Montserrat', sans-serif;
-  }
+.caption {
+  @apply text-xs leading-tight font-medium;
+  font-family: 'Montserrat', sans-serif;
+}
 
+@layer base {
   p {
-    @apply text-base;
+    @apply text-base font-semibold;
     font-family: 'Montserrat', sans-serif;
   }
 
