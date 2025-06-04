@@ -39,6 +39,7 @@ const DishCanvas = ({
   camPos = [-5.6420153558161426, 3.9854443063593514, 1.5112565651280714],
   camRotat = [-1.2079611744858216, -0.9238947109821136, -1.126719858856303],
   scale = 5,
+  controlsEnabled = true,
   className = '',
 }) => {
   const dish = useGLTF(modelUrl);
@@ -59,7 +60,9 @@ const DishCanvas = ({
         <OrbitControls
           minPolarAngle={0}
           maxPolarAngle={(Math.PI * 2) / 5}
-          enableZoom={false}
+          enableZoom={controlsEnabled}
+          enableRotate={controlsEnabled}
+          enablePan={false}
         />
         <CameraLogger enabled={false} />
       </Canvas>
@@ -73,6 +76,7 @@ DishCanvas.propTypes = {
   camRotat: PropTypes.arrayOf(PropTypes.number),
   scale: PropTypes.number,
   className: PropTypes.string,
+  controlsEnabled: PropTypes.bool,
 };
 
 export default DishCanvas;
