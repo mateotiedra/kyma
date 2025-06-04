@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 import PropTypes from 'prop-types';
 import DishCanvas from './DishCanvas';
 
@@ -12,7 +12,12 @@ const DishLine = ({
   scale,
 }) => {
   const [canvasExpanded, setCanvasExpanded] = useState(false);
+  const resetViewRef = useRef(null);
+
   const toggleCanvas = () => {
+    if (canvasExpanded && resetViewRef.current) {
+      resetViewRef.current(); // Reset view when closing expanded view
+    }
     setCanvasExpanded(!canvasExpanded);
   };
 
@@ -63,6 +68,7 @@ const DishLine = ({
             ]}
             scale={scale}
             controlsEnabled={canvasExpanded}
+            resetViewRef={resetViewRef}
           />
         </div>
       )}

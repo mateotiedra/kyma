@@ -1,71 +1,84 @@
 /* eslint-disable react/no-unknown-property */
-import { OrbitControls, Stats, useGLTF } from '@react-three/drei';
-import { Canvas, useFrame, useThree } from '@react-three/fiber';
-import { useRef } from 'react';
+import { useRef, useEffect } from 'react';
 import PropTypes from 'prop-types';
-
-const RotatingDish = ({ model, scale }) => {
-  const ref = useRef();
-  useFrame(() => {
-    if (ref.current) {
-      ref.current.rotation.y += 0.003; // Adjust speed as needed
-    }
-  });
-  return <primitive ref={ref} object={model.scene} scale={scale} />;
-};
-
-RotatingDish.propTypes = {
-  model: PropTypes.object.isRequired,
-  scale: PropTypes.number,
-};
-
-const CameraLogger = ({ enabled }) => {
-  const { camera } = useThree();
-  useFrame(() => {
-    if (!enabled) return;
-    // Log camera position and rotation (angle in radians)
-    console.log('Camera position:', camera.position.toArray());
-    console.log('Camera rotation (Euler):', camera.rotation.toArray());
-  });
-  return null;
-};
-
-CameraLogger.propTypes = {
-  enabled: PropTypes.bool,
-};
 
 const DishCanvas = ({
   modelUrl,
-  camPos = [-5.6420153558161426, 3.9854443063593514, 1.5112565651280714],
-  camRotat = [-1.2079611744858216, -0.9238947109821136, -1.126719858856303],
-  scale = 5,
   controlsEnabled = true,
   className = '',
+  resetViewRef,
+  defaultZoom = 3,
 }) => {
-  const dish = useGLTF(modelUrl);
+  const modelViewerRef = useRef(null);
+
+  // Handler to reset the camera orbit
+  const handleResetView = () => {
+    if (modelViewerRef.current) {
+      modelViewerRef.current.setAttribute(
+        'camera-orbit',
+        `0rad 1.2rad ${defaultZoom}m`
+      );
+      modelViewerRef.current.setAttribute('field-of-view', '45deg');
+      /* modelViewerRef.current.setAttribute('zoom', '1');
+      modelViewerRef.current.setAttribute('camera-target', 'auto auto auto'); */
+    }
+  };
+
+  // Expose the reset handler to parent via ref
+  if (resetViewRef) {
+    resetViewRef.current = handleResetView;
+  }
+
+  // Rotating animation: increment theta (first value of camera-orbit) continuously
+  useEffect(() => {
+    let theta = 0;
+    let animationFrameId;
+
+    const animate = () => {
+      if (modelViewerRef.current && !controlsEnabled) {
+        theta += 0.005; // Adjust speed as needed
+        modelViewerRef.current.setAttribute(
+          'camera-orbit',
+          `${theta}rad 1.2rad ${defaultZoom}m`
+        );
+      }
+      animationFrameId = requestAnimationFrame(animate);
+    };
+
+    animate();
+
+    return () => {
+      cancelAnimationFrame(animationFrameId);
+    };
+  }, [controlsEnabled, defaultZoom]);
+
   return (
     <div className={className}>
-      <Canvas
-        camera={{
-          position: camPos,
-          rotation: camRotat,
-          fov: 50,
-          near: 0.1,
-          far: 200,
+      <model-viewer
+        ref={modelViewerRef}
+        src={modelUrl}
+        alt='3D Dish Model'
+        camera-controls={controlsEnabled}
+        min-camera-orbit={`-500rad 0rad ${controlsEnabled ? 2 : defaultZoom}m`}
+        max-camera-orbit={`500rad 1.57rad ${
+          controlsEnabled ? 10 : defaultZoom
+        }m`}
+        default-camera-orbit={`0rad 1.2rad ${defaultZoom}m`}
+        disable-pan
+        reveal='auto'
+        loading='eager'
+        style={{
+          width: '100%',
+          height: '100%',
+          '--progress-bar-color': 'transparent',
         }}
-      >
-        <RotatingDish model={dish} scale={scale} />
-        <ambientLight intensity={3.0} />
-        <Stats />
-        <OrbitControls
-          minPolarAngle={0}
-          maxPolarAngle={(Math.PI * 2) / 5}
-          enableZoom={controlsEnabled}
-          enableRotate={controlsEnabled}
-          enablePan={false}
-        />
-        <CameraLogger enabled={false} />
-      </Canvas>
+        ar
+        onLoad={(e) => {
+          if (e.target && e.target.style) {
+            e.target.style.willChange = '';
+          }
+        }}
+      ></model-viewer>
     </div>
   );
 };
@@ -77,6 +90,8 @@ DishCanvas.propTypes = {
   scale: PropTypes.number,
   className: PropTypes.string,
   controlsEnabled: PropTypes.bool,
+  resetViewRef: PropTypes.object,
+  defaultZoom: PropTypes.number,
 };
 
 export default DishCanvas;
