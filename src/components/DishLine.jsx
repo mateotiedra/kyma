@@ -9,7 +9,6 @@ const DishLine = ({
   fontStyle,
   className,
   modelUrl,
-  scale,
 }) => {
   const [canvasExpanded, setCanvasExpanded] = useState(false);
   const resetViewRef = useRef(null);
@@ -33,7 +32,7 @@ const DishLine = ({
         <div
           className={
             canvasExpanded
-              ? 'h-screen w-screen fixed top-0 left-0 bg-white z-40 '
+              ? 'h-[100dvh] w-[100dvw] fixed top-0 left-0 bg-white z-40 '
               : 'w-32 h-10 mt-2 relative flex-1/3'
           }
           onClick={() => {
@@ -56,17 +55,10 @@ const DishLine = ({
           <DishCanvas
             className={
               canvasExpanded
-                ? 'w-full h-full border-cyan-400 rounded-lg'
+                ? 'w-full h-full'
                 : 'h-32 w-32 absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2'
             }
             modelUrl={modelUrl}
-            camPos={[
-              -5.6420153558161426, 3.9854443063593514, 1.5112565651280714,
-            ]}
-            camRotat={[
-              -1.2079611744858216, -0.9238947109821136, -1.126719858856303,
-            ]}
-            scale={scale}
             controlsEnabled={canvasExpanded}
             resetViewRef={resetViewRef}
           />

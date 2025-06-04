@@ -72,7 +72,7 @@ const DishCanvas = ({
           height: '100%',
           '--progress-bar-color': 'transparent',
         }}
-        ar
+        ar={controlsEnabled}
         onLoad={(e) => {
           if (e.target && e.target.style) {
             e.target.style.willChange = '';
