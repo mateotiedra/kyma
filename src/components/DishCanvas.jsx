@@ -7,7 +7,7 @@ const DishCanvas = ({
   controlsEnabled = true,
   className = '',
   resetViewRef,
-  defaultZoom = 3,
+  defaultZoom = 1,
 }) => {
   const modelViewerRef = useRef(null);
 
@@ -59,9 +59,11 @@ const DishCanvas = ({
         src={modelUrl}
         alt='3D Dish Model'
         camera-controls={controlsEnabled}
-        min-camera-orbit={`-500rad 0rad ${controlsEnabled ? 2 : defaultZoom}m`}
+        min-camera-orbit={`-500rad 0rad ${
+          controlsEnabled ? 0.5 : defaultZoom
+        }m`}
         max-camera-orbit={`500rad 1.57rad ${
-          controlsEnabled ? 10 : defaultZoom
+          controlsEnabled ? 3 : defaultZoom
         }m`}
         default-camera-orbit={`0rad 1.2rad ${defaultZoom}m`}
         disable-pan
