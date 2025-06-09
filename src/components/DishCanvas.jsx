@@ -7,7 +7,7 @@ const DishCanvas = ({
   controlsEnabled = true,
   className = '',
   resetViewRef,
-  defaultZoom = 1,
+  defaultZoom = 2,
 }) => {
   const modelViewerRef = useRef(null);
 

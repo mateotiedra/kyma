@@ -3,14 +3,21 @@ import DishLine from './DishLine';
 
 function DishList({ title, subtitle, dishes, className = '' }) {
   return (
-    <div className={className}>
-      {title && <h2>{title}</h2>}
-      {subtitle && <p className='font-bold leading-3'>{subtitle}</p>}
+    <div className={className + ' bg-white py-5'}>
+      {(title || subtitle) && (
+        <div className='top-0 z-10 bg-white px-5 pb-3 '>
+          {title && <h2>{title}</h2>}
+          {subtitle && <p className='font-bold leading-3'>{subtitle}</p>}
+        </div>
+      )}
       <div
-        className={'flex flex-col gap-y-4' + (subtitle || title ? ' mt-4' : '')}
+        className={
+          'flex flex-row flex-wrap items-stretch justify-between gap-4 px-5' +
+          (subtitle || title ? ' mt-4' : '')
+        }
       >
         {dishes.map((dish, index) => (
-          <DishLine key={index} {...dish} />
+          <DishLine className='w-full sm:w-[47%]' key={index} {...dish} />
         ))}
       </div>
     </div>

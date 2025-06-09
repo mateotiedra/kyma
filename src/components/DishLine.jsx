@@ -21,19 +21,23 @@ const DishLine = ({
   };
 
   return (
-    <div className={className + ' flex flex-row gap-y-2 items-center'}>
-      <div className='flex flex-col justify-center flex-2/3'>
-        <div className='flex justify-between font-semibold text-lg'>
-          <h3 className={`${fontStyle}`}>{name}</h3>
-        </div>
-        <p className='caption leading-4 relative'>{ingredients}</p>
+    <div
+      className={
+        className +
+        ' flex flex-row gap-3 items-stretch justify-between cursor-pointer'
+      }
+    >
+      <div className='flex flex-col justify-center max-w-2/3'>
+        <h3 className={`${fontStyle}`}>{name}</h3>
+        <p className=''>CHF {price}</p>
+        <p className='caption line-clamp-2'>{ingredients}</p>
       </div>
       {modelUrl && (
         <div
           className={
             canvasExpanded
-              ? 'h-[100dvh] w-[100dvw] fixed top-0 left-0 bg-white z-40 '
-              : 'w-32 h-10 mt-2 relative flex-1/3'
+              ? 'h-[100dvh] w-[100dvw] fixed top-0 left-0 bg-neutral-50 z-40 '
+              : 'min-w-[100px] max-w-[120px] aspect-square relative flex-grow bg-neutral-50 overflow-hidden rounded-lg'
           }
           onClick={() => {
             if (!canvasExpanded) toggleCanvas();
@@ -56,7 +60,7 @@ const DishLine = ({
             className={
               canvasExpanded
                 ? 'w-full h-full'
-                : 'h-32 w-32 absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2'
+                : 'h-full w-full absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2'
             }
             modelUrl={modelUrl}
             controlsEnabled={canvasExpanded}
@@ -64,7 +68,6 @@ const DishLine = ({
           />
         </div>
       )}
-      <p className='justify-self-end self-end'>{price}</p>
     </div>
   );
 };
